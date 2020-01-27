@@ -1,6 +1,4 @@
-package org.acme.quickstart;
-
-import java.util.Set;
+package com.redhat.developer;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;

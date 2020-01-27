@@ -1,17 +1,10 @@
-package org.acme.quickstart;
-
+package com.redhat.developer.generators;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.mapper.ObjectMapperDeserializationContext;
-import io.restassured.mapper.ObjectMapperSerializationContext;
-import org.acme.quickstart.domain.DMNResult;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import com.redhat.developer.domain.DMNResult;
 
-public class DMNResultTest {
-
+public class DMNResultGenerator {
     private final static String result = "{\n" +
             "      \"messages\" : [ ],\n" +
             "      \"model-namespace\" : \"https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF\",\n" +
@@ -54,18 +47,15 @@ public class DMNResultTest {
             "    \n" +
             "  }\n";
 
-    @Test
-    public void testDeserialization() {
+    public static DMNResult GetDMNResult(){
         ObjectMapper objectMapper = new ObjectMapper();
-
-        DMNResult deserializedResult = null;
+        DMNResult obj = null;
         try {
-            deserializedResult = objectMapper.readValue(result, DMNResult.class);
+            obj = objectMapper.readValue(result, DMNResult.class);
         } catch (JsonProcessingException e) {
             System.out.println("Got a non valid event");
             e.printStackTrace();
         }
-
-        Assertions.assertEquals("https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF", deserializedResult.getModelNameSpace());
+        return obj;
     }
 }

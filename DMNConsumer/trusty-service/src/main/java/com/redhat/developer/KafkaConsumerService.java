@@ -1,14 +1,12 @@
-package org.acme.quickstart;
+package com.redhat.developer;
 
 import java.time.Duration;
-import java.util.Properties;
-import java.util.Arrays;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.redhat.developer.domain.DMNResult;
 import io.quarkus.runtime.StartupEvent;
-import org.acme.quickstart.domain.DMNResult;
-import org.acme.quickstart.kafka.KafkaConsumerFactory;
+import com.redhat.developer.kafka.KafkaConsumerFactory;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

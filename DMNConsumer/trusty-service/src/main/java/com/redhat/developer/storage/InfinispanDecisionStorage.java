@@ -1,8 +1,8 @@
-package org.acme.quickstart.storage;
+package com.redhat.developer.storage;
 
 import java.util.List;
 
-import org.acme.quickstart.domain.DMNResult;
+import com.redhat.developer.domain.DMNResult;
 
 public class InfinispanDecisionStorage implements IDecisionStorage {
 

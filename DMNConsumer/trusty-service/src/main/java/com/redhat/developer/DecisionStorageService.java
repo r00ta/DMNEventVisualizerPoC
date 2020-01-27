@@ -1,13 +1,12 @@
-package org.acme.quickstart;
+package com.redhat.developer;
 
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import org.acme.quickstart.domain.DMNResult;
-import org.acme.quickstart.storage.IDecisionStorage;
-import org.acme.quickstart.storage.InMemoryDecisionStorage;
+import com.redhat.developer.domain.DMNResult;
+import com.redhat.developer.storage.IDecisionStorage;
+import com.redhat.developer.storage.InMemoryDecisionStorage;
 
 @Singleton
 public class DecisionStorageService implements IDecisionStorageService {

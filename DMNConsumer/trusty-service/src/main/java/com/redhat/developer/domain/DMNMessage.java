@@ -1,4 +1,4 @@
-package org.acme.quickstart.domain;
+package com.redhat.developer.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

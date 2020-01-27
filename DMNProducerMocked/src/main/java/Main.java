@@ -1,16 +1,12 @@
-//import util.properties packages
 import java.util.Properties;
 
-//import simple producer packages
 import domain.DMNResultGenerator;
 import org.apache.kafka.clients.producer.Producer;
 
-//import KafkaProducer packages
 import org.apache.kafka.clients.producer.KafkaProducer;
 
-//import ProducerRecord packages
 import org.apache.kafka.clients.producer.ProducerRecord;
-//Create java class named “SimpleProducer”
+
 public class Main {
 
     public static void main(String[] args) throws Exception{

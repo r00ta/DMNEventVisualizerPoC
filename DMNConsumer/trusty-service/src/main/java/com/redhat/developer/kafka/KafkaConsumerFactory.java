@@ -1,4 +1,4 @@
-package org.acme.quickstart.kafka;
+package com.redhat.developer.kafka;
 
 import java.util.Arrays;
 import java.util.Properties;

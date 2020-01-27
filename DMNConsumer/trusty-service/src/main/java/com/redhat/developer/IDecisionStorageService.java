@@ -1,8 +1,8 @@
-package org.acme.quickstart;
+package com.redhat.developer;
 
 import java.util.List;
 
-import org.acme.quickstart.domain.DMNResult;
+import com.redhat.developer.domain.DMNResult;
 
 public interface IDecisionStorageService {
 

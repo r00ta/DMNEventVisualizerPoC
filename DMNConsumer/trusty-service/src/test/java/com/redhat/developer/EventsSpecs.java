@@ -1,13 +1,11 @@
-package org.acme.quickstart;
+package com.redhat.developer;
 
 import javax.inject.Inject;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.redhat.developer.domain.DMNResult;
+import com.redhat.developer.generators.DMNResultGenerator;
+import com.redhat.developer.mocks.DecisionStorageServiceMock;
 import io.quarkus.test.junit.QuarkusTest;
-import org.acme.quickstart.domain.DMNResult;
-import org.acme.quickstart.generators.DMNResultGenerator;
-import org.acme.quickstart.mocks.DecisionStorageServiceMock;
-import org.acme.quickstart.mocks.KafkaConsumerServiceMock;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;

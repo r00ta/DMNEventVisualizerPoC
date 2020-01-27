@@ -1,16 +1,14 @@
-package org.acme.quickstart.mocks;
+package com.redhat.developer.mocks;
 
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.enterprise.context.ApplicationScoped;
 
+import com.redhat.developer.domain.DMNResult;
 import io.quarkus.test.Mock;
-import org.acme.quickstart.DecisionStorageService;
-import org.acme.quickstart.domain.DMNResult;
+import com.redhat.developer.DecisionStorageService;
 
 @Mock
 @ApplicationScoped

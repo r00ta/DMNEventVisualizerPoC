@@ -1,10 +1,14 @@
-package org.acme.quickstart.generators;
+package com.redhat.developer;
+
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.acme.quickstart.domain.DMNResult;
+import com.redhat.developer.domain.DMNResult;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class DMNResultGenerator {
+public class DMNResultTest {
+
     private final static String result = "{\n" +
             "      \"messages\" : [ ],\n" +
             "      \"model-namespace\" : \"https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF\",\n" +
@@ -47,15 +51,18 @@ public class DMNResultGenerator {
             "    \n" +
             "  }\n";
 
-    public static DMNResult GetDMNResult(){
+    @Test
+    public void testDeserialization() {
         ObjectMapper objectMapper = new ObjectMapper();
-        DMNResult obj = null;
+
+        DMNResult deserializedResult = null;
         try {
-            obj = objectMapper.readValue(result, DMNResult.class);
+            deserializedResult = objectMapper.readValue(result, DMNResult.class);
         } catch (JsonProcessingException e) {
             System.out.println("Got a non valid event");
             e.printStackTrace();
         }
-        return obj;
+
+        Assertions.assertEquals("https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF", deserializedResult.getModelNameSpace());
     }
 }
