@@ -26,7 +26,7 @@ public class EventsSpecs {
                 .when().get("/events")
                 .then()
                 .statusCode(200)
-                .body(is("pippo"));
+                .body(containsString("availableKeys"), containsString("pippo"));
 
         given()
                 .when().get("/events/pippo")

@@ -28,7 +28,7 @@ public class KafkaConsumerService implements IKafkaConsumerService {
     // TODO: Find another way to start the application, because even if mocked the CDI will start it!
     void onStart(@Observes StartupEvent event) {
 
-//
+
 //        if (true){ // TRUE if you want to run tests -> TO BE FIXED
 //            return;
 //        }

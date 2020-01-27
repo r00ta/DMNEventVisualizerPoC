@@ -11,7 +11,6 @@ import com.redhat.developer.storage.InMemoryDecisionStorage;
 @Singleton
 public class DecisionStorageService implements IDecisionStorageService {
 
-        // TODO: How to inject with quarkus?
         private IDecisionStorage storageManager = new InMemoryDecisionStorage();
 
         @Override
