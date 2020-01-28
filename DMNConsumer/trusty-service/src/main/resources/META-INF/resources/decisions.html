@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="   style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+            name="description"
+            content="Web site created using create-react-app"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/dmn-js@7.3.0/dist/assets/dmn-js-drd.css">
+    <link rel="stylesheet" href="https://unpkg.com/dmn-js@7.3.0/dist/assets/dmn-js-decision-table.css">
+    <link rel="stylesheet" href="https://unpkg.com/dmn-js@7.3.0/dist/assets/dmn-js-literal-expression.css">
+    <link rel="stylesheet" href="https://unpkg.com/dmn-js@7.3.0/dist/assets/dmn-font/css/dmn.css">
+    <script src="https://unpkg.com/dmn-js@7.3.0/dist/dmn-viewer.development.js"></script>
+
+    <div>
+        <div class="column left">
+            <h2>Decisions</h2>
+            <div class="list-group" id="decisionList">
+                <a class="list-group-item">
+                    Item 1
+                </a>
+                <a class="list-group-item">
+                    Item 2
+                </a>
+            </div>
+        </div>
+        <div class="column right">
+            <div class="tab-content" id="nav-tabContent">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+          $(".list-group-item").on('click', function(){
+            $('.active').removeClass('active');
+            $(this).addClass('active');
+            console.log($(this).html());
+            $.get('/decisions',  // url
+              function (data, textStatus, jqXHR) {  // success callback
+                  alert('status: ' + textStatus + ', data:' + data);
+            });
+          });
+        });
+
+        $.get( "decisions", function( data ) {
+            alert(data);
+            var list =  document.getElementById("decisionList");
+            for (var decision of data["availableKeys"]){
+              var li = document.createElement("a");
+              li.classList.add('list-group-item');
+              li.appendChild(document.createTextNode(decision));
+              list.appendChild(li);
+              }
+          alert( "Load was performed." );
+        });
+    </script>
+    </body>
+</html>

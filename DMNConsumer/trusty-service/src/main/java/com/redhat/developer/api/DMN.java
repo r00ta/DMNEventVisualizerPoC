@@ -7,28 +7,29 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.redhat.developer.IDecisionStorageService;
+import com.redhat.developer.responses.AvailableDMNs;
 import com.redhat.developer.responses.AvailableKeysResponse;
+import com.redhat.developer.responses.DMNResponse;
 import com.redhat.developer.responses.DecisionResponse;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
-@Path("/decisions")
-public class Decisions {
+@Path("/dmn")
+public class DMN{
 
     @Inject
     IDecisionStorageService storageService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public AvailableKeysResponse getAllKeys() throws JsonProcessingException {
-        return new AvailableKeysResponse(storageService.getAllDMNResults());
+    public AvailableDMNs getAllDMNs(){
+        return new AvailableDMNs(storageService.getAllDMNModelNames());
     }
 
     @GET
-    @Path("/{key}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public DecisionResponse getDecisionByKey(@PathParam("key") String key){
-        return new DecisionResponse(key, storageService.getDMNResultByKey(key));
+    @Path("/{name}")
+    @Produces(MediaType.APPLICATION_XML)
+    public DMNResponse getDMNModelByName(@PathParam("name") String name){
+        return new DMNResponse(name, storageService.getDMNModelByName(name));
     }
 }

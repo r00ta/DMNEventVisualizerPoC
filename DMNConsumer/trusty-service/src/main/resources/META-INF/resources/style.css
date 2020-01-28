@@ -1,0 +1,14 @@
+/* Create two unequal columns that floats next to each other */
+html, body {margin: 0; height: 100%; overflow: hidden; position: relative}
+
+.column {
+  float: left;
+}
+
+.left {
+  width: 30%;
+}
+
+.right {
+  width: 70%;
+}
