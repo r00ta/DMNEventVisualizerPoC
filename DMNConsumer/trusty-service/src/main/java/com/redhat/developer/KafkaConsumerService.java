@@ -28,7 +28,7 @@ public class KafkaConsumerService implements IKafkaConsumerService {
     // TODO: Find another way to start the application, because even if mocked the CDI will start it!
     void onStart(@Observes StartupEvent event) {
 
-
+//
 //        if (true){ // TRUE if you want to run tests -> TO BE FIXED
 //            return;
 //        }
@@ -54,10 +54,9 @@ public class KafkaConsumerService implements IKafkaConsumerService {
                 }
                 storageService.storeDMNResult(record.key(), result);
                 counter++;
-                System.out.println("Count++");
                 // print the offset,key and value for the consumer records.
-                System.out.printf("offset = %d, key = %s, value = %s\n",
-                                  record.offset(), record.key(), record.value());
+                System.out.printf("offset = %d, key = %s, #events = %d",
+                                  record.offset(), record.key(), counter);
             }
         }
     }

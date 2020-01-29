@@ -56,7 +56,7 @@ public class Main {
             String event = DMNResultGenerator.Generate();
             producer.send(new ProducerRecord<String, String>(topicName,
                                                              Integer.toString(i), event));
-            Thread.sleep(1000);
+            Thread.sleep(10000);
         }
         System.out.println("Message sent successfully");
         producer.close();

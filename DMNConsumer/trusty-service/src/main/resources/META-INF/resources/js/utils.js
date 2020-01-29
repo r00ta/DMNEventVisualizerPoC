@@ -9,3 +9,13 @@ class Decision{
     this.decision = decision;
   }
 }
+
+function updateScroll(id){
+    var element = document.getElementById(id);
+    try {
+        element.scrollTop = element.scrollHeight;
+    }
+    catch(err) {
+    }
+
+}
