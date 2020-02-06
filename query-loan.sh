@@ -7,6 +7,6 @@ curl --location --request POST 'http://localhost:8080/dmn-loan-eligibility' --he
 "Loan": {
 "duration": 15,
 "installment": 180
-}, "God" : "no"
+}, "God" : "No"
 }'
 

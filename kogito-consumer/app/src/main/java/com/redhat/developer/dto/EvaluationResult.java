@@ -19,5 +19,5 @@ public class EvaluationResult {
     public String result;
 
     @JsonProperty("messages")
-    public List<String> messages;
+    public List<EvaluationMessage> messages;
 }
