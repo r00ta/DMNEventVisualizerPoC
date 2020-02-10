@@ -1,12 +1,14 @@
-# DMNEventVisualizerPoC
+# trusty-PoC
 PoC DMN Event visualizer
 
+## Install and run
 Build and run the containers with 
 ```bash
 ./run-compose.yml
 ```
 This script will build the jar artifacts on your local host and then will run `docker-compose`. 
 
+## Architecture overview
 The architecture is more or less like this 
 
 ![TrustyAIArch](https://user-images.githubusercontent.com/18282531/73201355-28b34500-4139-11ea-9561-4bf9e049bacf.png)
@@ -24,14 +26,17 @@ If you run `run-compose.sh` script, there will be many containers allocated:
 8) zookeeper instance
 9) kafdrop instance
 
+## Make simple requests to evaluate the DMN models
 In the folder `sample-requests` there are 2 sample scripts that run sample requests to `localhost:8080` (to the producer). 
 
+## Make random requests automatically
 If you want to generate some random requests to the producer, you can run 
 ```bash
 python3 data-generator/generator.py
 ```
-It will generate 50 random requests for the loan-eligibility DMN.
+It will generate 10 random requests for the loan-eligibility DMN.
 
+## Visualize the decisions
 After that you make some requests, you can navigate to 
 1) `localhost:3000` for the grafana dashboard automatically generated at run time (depending on the rules that have been fired). 
 ![Screenshot from 2020-02-10 12-00-06](https://user-images.githubusercontent.com/18282531/74144370-e68c0800-4bfc-11ea-9217-8c98f305bc2f.png)
