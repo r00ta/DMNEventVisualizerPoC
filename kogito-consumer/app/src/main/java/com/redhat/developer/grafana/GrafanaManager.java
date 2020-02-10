@@ -17,9 +17,13 @@ import com.redhat.developer.grafana.model.panel.GrafanaPanel;
 import com.redhat.developer.grafana.model.panel.GrafanaTarget;
 import com.redhat.developer.responses.GrafanaNewDashboardResponse;
 import com.redhat.developer.utils.HttpHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Singleton
 public class GrafanaManager implements IGrafanaManager {
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpHelper.class);
+
     private Set<String> activatedRules;
 
     private HttpHelper httpHelper;
@@ -38,10 +42,9 @@ public class GrafanaManager implements IGrafanaManager {
         httpHelper = new HttpHelper(BASEHOST);
         GrafanaDashboard dashboard = new GrafanaDashboard(0, true);
         dashboard.meta = new GrafanaDashboardMeta(null, null, "DRL Dashboard", null, "browser", 16, 0);
-        System.out.println(mapper.writeValueAsString(dashboard));
         GrafanaNewDashboardResponse response = createNewDashboard(dashboard);
         currentDashboard = dashboard;
-        System.out.println(mapper.writeValueAsString(response));
+        LOGGER.info("Grafana dashboard has been created.");
     }
 
     @Override
@@ -64,7 +67,7 @@ public class GrafanaManager implements IGrafanaManager {
     @Override
     public synchronized boolean addNewRulePanel(String ruleName, String status) {
         if (!activatedRules.contains(ruleName)){
-            System.out.println("new rule: " + ruleName);
+            LOGGER.info("New rule: " + ruleName);
             numOfPanel++;
             activatedRules.add(ruleName);
             GrafanaPanel panel = new GrafanaPanel(
@@ -75,14 +78,13 @@ public class GrafanaManager implements IGrafanaManager {
             panel.gridPos = new GrafanaGridPos(12 * ( (numOfPanel - 1) % 2), 8 * ((numOfPanel - 1) / 2), 12, 8);
             panel.targets.add(new GrafanaTarget(String.format("dmn_rules{rule_name=\"%s\"}", ruleName), "time_series", 1, ruleName));
             panel.lines = true;
-            System.out.println(currentDashboard.folderId);
-            System.out.println(currentDashboard.meta.panels);
             currentDashboard.meta.panels.add(panel);
             try {
                 createNewDashboard(currentDashboard);
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }
+            LOGGER.info("New grafana panel has been added.");
         }
         return true;
     }

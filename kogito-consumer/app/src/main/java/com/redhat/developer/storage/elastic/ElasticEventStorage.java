@@ -11,15 +11,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.redhat.developer.dto.DMNEvent;
 import com.redhat.developer.storage.IEventStorage;
 import com.redhat.developer.utils.HttpHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @ApplicationScoped
 public class ElasticEventStorage implements IEventStorage {
-    //The config parameters for the connection
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpHelper.class);
+
     private static final String HOST = "http://elasticsearch:9200/";
     private static ObjectMapper objectMapper;
 
-    private static final String INDEX = "eventdatahi";
-    private static final String TYPE = "event";
+    private static final String INDEX = "dmneventdata";
 
     private HttpHelper httpHelper;
 
@@ -38,7 +40,7 @@ public class ElasticEventStorage implements IEventStorage {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        System.out.println("Finally");
+        LOGGER.debug("Event stored.");
         return true;
     }
 
@@ -49,8 +51,9 @@ public class ElasticEventStorage implements IEventStorage {
                 "        \"match\": { \"id\" : \"" + key + "\"}\n" +
                 "    }\n" +
                 "}\n";
+        LOGGER.debug("Going to query ES with " + request);
         String response = httpHelper.doPost(INDEX + "/_search", request);
-        System.out.println(response);
+        LOGGER.debug("ES returned " + response);
         try {
             return (DMNEvent) objectMapper.readValue(response, ElasticSearchResponse.class).hits.hits.get(0).source;
         } catch (JsonProcessingException e) {
@@ -62,13 +65,12 @@ public class ElasticEventStorage implements IEventStorage {
     @Override
     public List<String> getAllKeys() {
         String request = "{\n" +
-                "\"_source\": \"id\", " +
+                "\"_source\": \"id\", \"size\": 100," +
                 "    \"query\": {\n" +
                 "        \"match_all\": {}\n" +
                 "    }\n" +
                 "}\n";
         String response = httpHelper.doPost(INDEX + "/_search", request);
-        System.out.println(response);
         try {
             return objectMapper.readValue(response, ElasticSearchResponse.class).hits.hits.stream().map(x -> x._id).collect(Collectors.toList());
         } catch (JsonProcessingException e) {

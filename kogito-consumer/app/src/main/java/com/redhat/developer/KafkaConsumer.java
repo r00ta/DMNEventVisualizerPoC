@@ -14,11 +14,15 @@ import com.redhat.developer.grafana.IGrafanaManager;
 import com.redhat.developer.metrics.IMetricsCollector;
 import com.redhat.developer.metrics.PrometheusMetricsCollector;
 import com.redhat.developer.storage.IEventStorage;
+import com.redhat.developer.utils.HttpHelper;
 import com.redhat.developer.utils.JsonUtils;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @ApplicationScoped
 public class KafkaConsumer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpHelper.class);
 
     @Inject
     IEventStorage eventStorage;
@@ -28,7 +32,7 @@ public class KafkaConsumer {
 
     @Incoming("kogito-tracing")
     public void onProcessInstanceEvent(DMNEvent event) {
-        System.out.println("Hey i've got this message: " + event.data.toString());
+        LOGGER.info("Hey i've got this message: " + event.data.toString());
         CompletableFuture.runAsync(() -> {
             processEvent(event);
         });

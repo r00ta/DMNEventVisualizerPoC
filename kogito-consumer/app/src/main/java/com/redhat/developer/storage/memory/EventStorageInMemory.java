@@ -1,4 +1,4 @@
-package com.redhat.developer.storage;
+package com.redhat.developer.storage.memory;
 
 import java.util.Collections;
 import java.util.List;
@@ -8,9 +8,10 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 
 import com.redhat.developer.dto.DMNEvent;
+import com.redhat.developer.storage.IEventStorage;
 
 //@ApplicationScoped
-public class EventStorageInMemory implements IEventStorage{
+public class EventStorageInMemory implements IEventStorage {
 
     public ConcurrentHashMap<String, DMNEvent> database;
 

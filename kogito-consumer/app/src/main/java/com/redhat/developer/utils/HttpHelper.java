@@ -15,9 +15,13 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HttpHelper {
     private static final CloseableHttpClient httpclient = HttpClients.createDefault();
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpHelper.class);
 
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -34,9 +38,8 @@ public class HttpHelper {
             response = httpclient.execute(request);
             HttpEntity entity = response.getEntity();
             if (entity != null) {
-                // return it as a String
                 String result = EntityUtils.toString(entity);
-                System.out.println(result);
+                LOGGER.debug("Get request returned " + result);
                 return result;
             }
         } catch (IOException e) {
@@ -48,12 +51,12 @@ public class HttpHelper {
     public String doPost(String path, String params) {
 
         HttpPost post = new HttpPost(baseHost + path);
-        System.out.println("Going to post to: " + path + "\n with: " + params);
+        LOGGER.debug("Going to post to: " + path + "\n with: " + params);
         try {
             post.setEntity(new StringEntity(params, ContentType.APPLICATION_JSON));
             CloseableHttpResponse response = httpclient.execute(post);
             String result = EntityUtils.toString(response.getEntity());
-            System.out.println("I've got " + result);
+            LOGGER.debug("I've got " + result);
             return result;
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
