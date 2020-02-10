@@ -35,5 +35,6 @@ It will generate 50 random requests for the loan-eligibility DMN.
 After that you make some requests, you can navigate to 
 1) `localhost:3000` for the grafana dashboard automatically generated at run time (depending on the rules that have been fired). 
 2) `localhost:8180/decisions.html` to check out a debug UX (it will show all the events stored on elastic search and if you click on one item, that item will be fetched from the database and displayed).
-3) `localhost:5601` for the kibana dashboard
+3) `localhost:5601` for the kibana dashboard (here an example of dashboard on kibana)
+![Screenshot from 2020-02-10 11-57-42](https://user-images.githubusercontent.com/18282531/74144245-ac226b00-4bfc-11ea-9dc9-16de809b0e02.png)
 
