@@ -10,8 +10,7 @@ This script will build the jar artifacts on your local host and then will run `d
 
 ## Architecture overview
 The architecture is more or less like this 
-
-![TrustyAIArch](https://user-images.githubusercontent.com/18282531/73201355-28b34500-4139-11ea-9561-4bf9e049bacf.png)
+![Untitled Diagram](https://user-images.githubusercontent.com/18282531/74157580-ce29e680-4c18-11ea-8d59-36c203389cff.jpg)
 
 1) A producer will generate events (DMN Model register, DMN decisions) and send them to kafka (implementation copied from https://github.com/kostola/kogito-examples/tree/dmn-quarkus-listener-example/dmn-quarkus-listener-example)
 2) A consumer (trusty service) will get the decisions, store them with elastic search, create grafana dashboards and make them available.
