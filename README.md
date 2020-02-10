@@ -4,7 +4,7 @@ PoC DMN Event visualizer
 ## Install and run
 Build and run the containers with 
 ```bash
-./run-compose.yml
+./run-compose.sh
 ```
 This script will build the jar artifacts on your local host and then will run `docker-compose`. 
 
