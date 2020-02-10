@@ -9,7 +9,7 @@ import javax.enterprise.context.ApplicationScoped;
 
 import com.redhat.developer.dto.DMNEvent;
 
-@ApplicationScoped
+//@ApplicationScoped
 public class EventStorageInMemory implements IEventStorage{
 
     public ConcurrentHashMap<String, DMNEvent> database;
