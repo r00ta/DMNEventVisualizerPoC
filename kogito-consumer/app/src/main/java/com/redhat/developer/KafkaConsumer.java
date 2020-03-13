@@ -6,13 +6,7 @@ import java.util.concurrent.CompletionStage;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.redhat.developer.dto.DMNEvent;
-import com.redhat.developer.dto.EvaluationResult;
-import com.redhat.developer.grafana.GrafanaManager;
-import com.redhat.developer.grafana.IGrafanaManager;
-import com.redhat.developer.metrics.IMetricsCollector;
-import com.redhat.developer.metrics.PrometheusMetricsCollector;
 import com.redhat.developer.storage.IEventStorage;
 import com.redhat.developer.utils.HttpHelper;
 import com.redhat.developer.utils.JsonUtils;
@@ -27,9 +21,6 @@ public class KafkaConsumer {
     @Inject
     IEventStorage eventStorage;
 
-    @Inject
-    IGrafanaManager grafanaManager;
-
     @Incoming("kogito-tracing")
     public void onProcessInstanceEvent(DMNEvent event) {
         LOGGER.info("Hey i've got this message: " + event.data.toString());
@@ -40,9 +31,5 @@ public class KafkaConsumer {
 
     private void processEvent(DMNEvent event){
         eventStorage.storeEvent(event.id, event);
-        for(EvaluationResult result : event.data.results){
-            grafanaManager.addNewRulePanel(result.name, result.evaluationStatus);
-            PrometheusMetricsCollector.getCounter().labels("dmn", result.name, result.evaluationStatus).inc();
-        }
     }
 }

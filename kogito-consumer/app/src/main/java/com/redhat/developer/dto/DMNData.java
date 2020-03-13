@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DMNData {
 
-    @JsonProperty("results")
-    public List<EvaluationResult> results;
+    @JsonProperty("result")
+    public Object result;
 
-    @JsonProperty("context")
-    public Object context;
+//    @JsonProperty("context")
+//    public Object context;
 }

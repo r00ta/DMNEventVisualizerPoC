@@ -36,11 +36,12 @@ public class ElasticEventStorage implements IEventStorage {
         String request = null;
         try {
             request = objectMapper.writeValueAsString(event);
+            LOGGER.info("going to store: " + request);
             httpHelper.doPost(INDEX + "/_doc/" + event.id, request);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        LOGGER.debug("Event stored.");
+        LOGGER.info("New event stored.");
         return true;
     }
 
