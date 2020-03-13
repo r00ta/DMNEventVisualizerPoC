@@ -2,6 +2,11 @@
 PoC DMN Event visualizer
 
 ## Install and run
+Install the patched kogito-runtimes with 
+```bash
+./setup.sh
+```
+
 Build and run the containers with 
 ```bash
 ./run-compose.sh
@@ -10,7 +15,7 @@ This script will build the jar artifacts on your local host and then will run `d
 
 ## Architecture overview
 The architecture is more or less like this 
-![Untitled Diagram](https://user-images.githubusercontent.com/18282531/74157580-ce29e680-4c18-11ea-8d59-36c203389cff.jpg)
+![Untitled Diagram](https://user-images.githubusercontent.com/18282531/76609097-189fcb00-6517-11ea-8395-f59bdb5da146.png)
 
 1) A producer will generate events (DMN Model register, DMN decisions) and send them to kafka (implementation copied from https://github.com/kostola/kogito-examples/tree/dmn-quarkus-listener-example/dmn-quarkus-listener-example)
 2) A consumer (trusty service) will get the decisions, store them with elastic search, create grafana dashboards and make them available.
