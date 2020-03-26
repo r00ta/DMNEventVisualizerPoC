@@ -1,10 +1,10 @@
 cd kogito-consumer/app
-./mvnw clean package
+mvn clean package
 
 cd ../../
 cd loanEligibilityApp/app
-./mvnw clean package
-cp target/generated-sources/kogito/dashboards/* ../../grafana/provisioning/dashboards
+mvn clean package
+cp target/resources/dashboards/* ../../grafana/provisioning/dashboards/
 
 cd ../../
 sudo docker-compose build && sudo docker-compose up
