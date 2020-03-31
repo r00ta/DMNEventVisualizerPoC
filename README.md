@@ -15,9 +15,9 @@ This script will build the jar artifacts on your local host and then will run `d
 
 ## Architecture overview
 The architecture is more or less like this 
-![Untitled Diagram](https://user-images.githubusercontent.com/18282531/76609097-189fcb00-6517-11ea-8395-f59bdb5da146.png)
+![overall (1)](https://user-images.githubusercontent.com/18282531/78021773-15e50880-7354-11ea-8bf3-b43494bb3bc6.png)
 
-1) A producer will generate events (DMN Model register, DMN decisions) and send them to kafka (implementation copied from https://github.com/kostola/kogito-examples/tree/dmn-quarkus-listener-example/dmn-quarkus-listener-example)
+1) A producer will generate events (DMN Model register, DMN decisions) and send them to kafka
 2) A consumer (trusty service) will get the decisions, store them with elastic search, create grafana dashboards and make them available.
 
 If you run `run-compose.sh` script, there will be many containers allocated: 
